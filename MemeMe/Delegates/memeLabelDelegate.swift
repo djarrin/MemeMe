@@ -10,15 +10,8 @@ import Foundation
 import UIKit
 
 class memeLabelDelegate : NSObject, UITextFieldDelegate {
-
-    var activeTextField: Bool
-    
-    override init() {
-        self.activeTextField = false
-    }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        self.activeTextField = true
         textField.text = ""
     }
     
@@ -26,10 +19,5 @@ class memeLabelDelegate : NSObject, UITextFieldDelegate {
         textField.resignFirstResponder()
         
         return true;
-    }
-    
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        self.activeTextField = false
-        print(textField)
     }
 }

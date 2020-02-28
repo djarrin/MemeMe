@@ -23,10 +23,10 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
     let labelDelegate = memeLabelDelegate()
     
     let memeTextAttributes: [NSAttributedString.Key: Any] = [
-        NSAttributedString.Key.strokeColor: UIColor.systemGray2,
-        NSAttributedString.Key.foregroundColor: UIColor.systemGray2,
+        NSAttributedString.Key.strokeColor: UIColor.black,
+        NSAttributedString.Key.foregroundColor: UIColor.black,
         NSAttributedString.Key.font: UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
-        NSAttributedString.Key.strokeWidth:  2.0
+
     ]
     
     override func viewDidLoad() {
@@ -37,13 +37,13 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
         self.view.addGestureRecognizer(tapGestureBackground)
         
         // Enable or disable the takePhotoButton depending on if camera is available
-        self.takePhotoButton.isEnabled = UIImagePickerController.isSourceTypeAvailable((.camera))
+        self.takePhotoButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
         // disable the share button unless an image is present
         if self.memeView.image == nil {
             self.shareButton.isEnabled = false
         }
         
-        // Move top and bottom toolbars into the safe area
+        // Move top toolbar into the safe area and adjust height so as fill in the top
         self.topToolbar.translatesAutoresizingMaskIntoConstraints = false
         self.bottomToolbar.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
