@@ -44,17 +44,17 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
         }
         
         // Move top toolbar into the safe area and adjust height so as fill in the top
-        self.topToolbar.translatesAutoresizingMaskIntoConstraints = false
-        self.bottomToolbar.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            self.topToolbar.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            self.topToolbar.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            self.topToolbar.heightAnchor.constraint(equalToConstant: 80),
-            self.bottomToolbar.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            self.bottomToolbar.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            self.bottomToolbar.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            self.bottomToolbar.heightAnchor.constraint(equalToConstant: 50)
-        ])
+//        self.topToolbar.translatesAutoresizingMaskIntoConstraints = false
+//        self.bottomToolbar.translatesAutoresizingMaskIntoConstraints = false
+//        NSLayoutConstraint.activate([
+//            self.topToolbar.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+//            self.topToolbar.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+//            self.topToolbar.heightAnchor.constraint(equalToConstant: 80),
+//            self.bottomToolbar.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+//            self.bottomToolbar.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+//            self.bottomToolbar.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+//            self.bottomToolbar.heightAnchor.constraint(equalToConstant: 50)
+//        ])
         
         self.topTextField.delegate = labelDelegate
         self.bottomTextField.delegate = labelDelegate
