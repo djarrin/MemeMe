@@ -39,9 +39,9 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
         // Enable or disable the takePhotoButton depending on if camera is available
         self.takePhotoButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
         // disable the share button unless an image is present
-        if self.memeView.image == nil {
-            self.shareButton.isEnabled = false
-        }
+//        if self.memeView.image == nil {
+//            self.shareButton.isEnabled = false
+//        }
         
         // Move top toolbar into the safe area and adjust height so as fill in the top
 //        self.topToolbar.translatesAutoresizingMaskIntoConstraints = false
@@ -56,17 +56,17 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
 //            self.bottomToolbar.heightAnchor.constraint(equalToConstant: 50)
 //        ])
         
-        self.topTextField.delegate = labelDelegate
-        self.bottomTextField.delegate = labelDelegate
+//        self.topTextField.delegate = labelDelegate
+//        self.bottomTextField.delegate = labelDelegate
         
         // Top and Bottom Textfield attributes
-        self.topTextField.defaultTextAttributes = memeTextAttributes
-        self.bottomTextField.defaultTextAttributes = memeTextAttributes
-        self.topTextField.textAlignment = .center
-        self.bottomTextField.textAlignment = .center
+//        self.topTextField.defaultTextAttributes = memeTextAttributes
+//        self.bottomTextField.defaultTextAttributes = memeTextAttributes
+//        self.topTextField.textAlignment = .center
+//        self.bottomTextField.textAlignment = .center
         
         // set up the memeView properties
-        self.memeView.contentMode = .scaleAspectFill
+//        self.memeView.contentMode = .scaleAspectFill
         
     }
     
