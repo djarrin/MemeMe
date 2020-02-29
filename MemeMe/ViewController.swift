@@ -11,7 +11,6 @@ import UIKit
 class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     
-    @IBOutlet weak var topToolbar: UIToolbar!
     @IBOutlet weak var bottomToolbar: UIToolbar!
     @IBOutlet weak var topTextField: UITextField!
     @IBOutlet weak var bottomTextField: UITextField!
@@ -22,6 +21,14 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
     
     let labelDelegate = memeLabelDelegate()
     
+    var isPortrait: Bool {
+        return UIApplication.shared.windows
+            .first?
+            .windowScene?
+            .interfaceOrientation
+            .isLandscape ?? false
+    }
+    
     let memeTextAttributes: [NSAttributedString.Key: Any] = [
         NSAttributedString.Key.strokeColor: UIColor.black,
         NSAttributedString.Key.foregroundColor: UIColor.black,
@@ -31,6 +38,9 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //set text contraints depending if it
+        setTextContraints()
         
         // some logic to unfocus the text fields
         let tapGestureBackground = UITapGestureRecognizer(target: self, action: #selector(self.backgroundTapped(_:)))
@@ -43,19 +53,6 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
             self.shareButton.isEnabled = false
         }
         
-        // Move top toolbar into the safe area and adjust height so as fill in the top
-        self.topToolbar.translatesAutoresizingMaskIntoConstraints = false
-        self.bottomToolbar.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            self.topToolbar.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            self.topToolbar.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            self.topToolbar.heightAnchor.constraint(equalToConstant: 80),
-            self.bottomToolbar.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            self.bottomToolbar.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            self.bottomToolbar.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            self.bottomToolbar.heightAnchor.constraint(equalToConstant: 50)
-        ])
-        
         self.topTextField.delegate = labelDelegate
         self.bottomTextField.delegate = labelDelegate
         
@@ -64,6 +61,8 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
         self.bottomTextField.defaultTextAttributes = memeTextAttributes
         self.topTextField.textAlignment = .center
         self.bottomTextField.textAlignment = .center
+        self.topTextField.text = "TOP TEXT"
+        self.bottomTextField.text = "BOTTOM TEXT"
         
         // set up the memeView properties
         self.memeView.contentMode = .scaleAspectFill
@@ -80,6 +79,10 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
         unsubscribeFromKeyboardNotifications()
     }
     
+    func setTextContraints() {
+        
+    }
+    
     func subscribeToKeyboardNotifications() {
 
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
@@ -92,7 +95,11 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
     }
     
     override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
-        print(UIDevice.current.orientation)
+        if isPortrait {
+            print("in protrait")
+        } else {
+            print("in landscape")
+        }
     }
 
     @objc func keyboardWillShow(_ notification:Notification) {
@@ -167,7 +174,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
         
         // Hide toolbar and navbar
         navigationController?.setNavigationBarHidden(true, animated: false)
-        self.topToolbar.isHidden = true
+        self.navigationController?.isNavigationBarHidden = true
         self.bottomToolbar.isHidden = true
         self.topTextField.tintColor = UIColor.clear
         self.bottomTextField.tintColor = UIColor.clear
@@ -181,7 +188,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
 
         // re-show toolbar and navbar
         navigationController?.setNavigationBarHidden(false, animated: false)
-        self.topToolbar.isHidden = false
+        self.navigationController?.isNavigationBarHidden = false
         self.bottomToolbar.isHidden = false
         self.topTextField.tintColor = UIColor.blue
         self.bottomTextField.tintColor = UIColor.blue
