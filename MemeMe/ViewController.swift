@@ -21,26 +21,14 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
     
     let labelDelegate = memeLabelDelegate()
     
-    var isPortrait: Bool {
-        return UIApplication.shared.windows
-            .first?
-            .windowScene?
-            .interfaceOrientation
-            .isLandscape ?? false
-    }
-    
     let memeTextAttributes: [NSAttributedString.Key: Any] = [
         NSAttributedString.Key.strokeColor: UIColor.black,
         NSAttributedString.Key.foregroundColor: UIColor.black,
         NSAttributedString.Key.font: UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
-
     ]
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        //set text contraints depending if it
-        setTextContraints()
         
         // some logic to unfocus the text fields
         let tapGestureBackground = UITapGestureRecognizer(target: self, action: #selector(self.backgroundTapped(_:)))
@@ -76,11 +64,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        unsubscribeFromKeyboardNotifications()
-    }
-    
-    func setTextContraints() {
-        
+        self.unsubscribeFromKeyboardNotifications()
     }
     
     func subscribeToKeyboardNotifications() {
@@ -88,35 +72,6 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
-    }
-    
-    func unsubscribeFromKeyboardNotifications() {
-        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
-    }
-    
-    override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
-        if isPortrait {
-            print("in protrait")
-        } else {
-            print("in landscape")
-        }
-    }
-
-    @objc func keyboardWillShow(_ notification:Notification) {
-        if self.bottomTextField.isEditing {
-            view.frame.origin.y = -1 * getKeyboardHeight(notification)
-        }
-    }
-    
-    @objc func keyboardWillHide(_ notification:Notification) {
-        view.frame.origin.y = 0.0
-    }
-    
-    func getKeyboardHeight(_ notification:Notification) -> CGFloat {
-
-        let userInfo = notification.userInfo
-        let keyboardSize = userInfo![UIResponder.keyboardFrameEndUserInfoKey] as! NSValue // of CGRect
-        return keyboardSize.cgRectValue.height
     }
     
     @IBAction func takePhoto(_ sender: Any) {
