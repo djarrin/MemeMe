@@ -15,6 +15,7 @@
 		DD24AD762400A82600979A17 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD24AD742400A82600979A17 /* LaunchScreen.storyboard */; };
 		DD773809240166EE0043FA77 /* memeLabelDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD773808240166EE0043FA77 /* memeLabelDelegate.swift */; };
 		DD9E4DFD240536DF00026993 /* Meme.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD9E4DFC240536DF00026993 /* Meme.swift */; };
+		DDBDC6D4240AEE71003F8DD8 /* ViewController+KeyboardNotifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDBDC6D3240AEE71003F8DD8 /* ViewController+KeyboardNotifiers.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		DD24AD772400A82600979A17 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DD773808240166EE0043FA77 /* memeLabelDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = memeLabelDelegate.swift; sourceTree = "<group>"; };
 		DD9E4DFC240536DF00026993 /* Meme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Meme.swift; sourceTree = "<group>"; };
+		DDBDC6D3240AEE71003F8DD8 /* ViewController+KeyboardNotifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+KeyboardNotifiers.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +71,7 @@
 				DD24AD742400A82600979A17 /* LaunchScreen.storyboard */,
 				DD24AD772400A82600979A17 /* Info.plist */,
 				DD9E4DFC240536DF00026993 /* Meme.swift */,
+				DDBDC6D3240AEE71003F8DD8 /* ViewController+KeyboardNotifiers.swift */,
 			);
 			path = MemeMe;
 			sourceTree = "<group>";
@@ -155,6 +158,7 @@
 				DD24AD6E2400A82500979A17 /* ViewController.swift in Sources */,
 				DD773809240166EE0043FA77 /* memeLabelDelegate.swift in Sources */,
 				DD24AD6A2400A82500979A17 /* AppDelegate.swift in Sources */,
+				DDBDC6D4240AEE71003F8DD8 /* ViewController+KeyboardNotifiers.swift in Sources */,
 				DD24AD6C2400A82500979A17 /* SceneDelegate.swift in Sources */,
 				DD9E4DFD240536DF00026993 /* Meme.swift in Sources */,
 			);

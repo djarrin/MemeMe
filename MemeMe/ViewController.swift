@@ -11,7 +11,6 @@ import UIKit
 class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     
-    @IBOutlet weak var topToolbar: UIToolbar!
     @IBOutlet weak var bottomToolbar: UIToolbar!
     @IBOutlet weak var topTextField: UITextField!
     @IBOutlet weak var bottomTextField: UITextField!
@@ -26,7 +25,6 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
         NSAttributedString.Key.strokeColor: UIColor.black,
         NSAttributedString.Key.foregroundColor: UIColor.black,
         NSAttributedString.Key.font: UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
-
     ]
     
     override func viewDidLoad() {
@@ -43,19 +41,6 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
             self.shareButton.isEnabled = false
         }
         
-        // Move top toolbar into the safe area and adjust height so as fill in the top
-        self.topToolbar.translatesAutoresizingMaskIntoConstraints = false
-        self.bottomToolbar.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            self.topToolbar.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            self.topToolbar.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            self.topToolbar.heightAnchor.constraint(equalToConstant: 80),
-            self.bottomToolbar.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            self.bottomToolbar.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            self.bottomToolbar.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            self.bottomToolbar.heightAnchor.constraint(equalToConstant: 50)
-        ])
-        
         self.topTextField.delegate = labelDelegate
         self.bottomTextField.delegate = labelDelegate
         
@@ -64,6 +49,8 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
         self.bottomTextField.defaultTextAttributes = memeTextAttributes
         self.topTextField.textAlignment = .center
         self.bottomTextField.textAlignment = .center
+        self.topTextField.text = "TOP TEXT"
+        self.bottomTextField.text = "BOTTOM TEXT"
         
         // set up the memeView properties
         self.memeView.contentMode = .scaleAspectFill
@@ -77,7 +64,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        unsubscribeFromKeyboardNotifications()
+        self.unsubscribeFromKeyboardNotifications()
     }
     
     func subscribeToKeyboardNotifications() {
@@ -85,31 +72,6 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
-    }
-    
-    func unsubscribeFromKeyboardNotifications() {
-        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
-    }
-    
-    override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
-        print(UIDevice.current.orientation)
-    }
-
-    @objc func keyboardWillShow(_ notification:Notification) {
-        if self.bottomTextField.isEditing {
-            view.frame.origin.y = -1 * getKeyboardHeight(notification)
-        }
-    }
-    
-    @objc func keyboardWillHide(_ notification:Notification) {
-        view.frame.origin.y = 0.0
-    }
-    
-    func getKeyboardHeight(_ notification:Notification) -> CGFloat {
-
-        let userInfo = notification.userInfo
-        let keyboardSize = userInfo![UIResponder.keyboardFrameEndUserInfoKey] as! NSValue // of CGRect
-        return keyboardSize.cgRectValue.height
     }
     
     @IBAction func takePhoto(_ sender: Any) {
@@ -167,7 +129,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
         
         // Hide toolbar and navbar
         navigationController?.setNavigationBarHidden(true, animated: false)
-        self.topToolbar.isHidden = true
+        self.navigationController?.isNavigationBarHidden = true
         self.bottomToolbar.isHidden = true
         self.topTextField.tintColor = UIColor.clear
         self.bottomTextField.tintColor = UIColor.clear
@@ -181,7 +143,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
 
         // re-show toolbar and navbar
         navigationController?.setNavigationBarHidden(false, animated: false)
-        self.topToolbar.isHidden = false
+        self.navigationController?.isNavigationBarHidden = false
         self.bottomToolbar.isHidden = false
         self.topTextField.tintColor = UIColor.blue
         self.bottomTextField.tintColor = UIColor.blue
