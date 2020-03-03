@@ -23,7 +23,8 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
     
     let memeTextAttributes: [NSAttributedString.Key: Any] = [
         NSAttributedString.Key.strokeColor: UIColor.black,
-        NSAttributedString.Key.foregroundColor: UIColor.black,
+        NSAttributedString.Key.strokeWidth: 2.0,
+        NSAttributedString.Key.foregroundColor: UIColor.white,
         NSAttributedString.Key.font: UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
     ]
     
@@ -45,15 +46,11 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
         self.bottomTextField.delegate = labelDelegate
         
         // Top and Bottom Textfield attributes
-        self.topTextField.defaultTextAttributes = memeTextAttributes
-        self.bottomTextField.defaultTextAttributes = memeTextAttributes
-        self.topTextField.textAlignment = .center
-        self.bottomTextField.textAlignment = .center
-        self.topTextField.text = "TOP TEXT"
-        self.bottomTextField.text = "BOTTOM TEXT"
+        setUpTextField(textField: topTextField, attributes: memeTextAttributes, "TOP TEXT")
+        setUpTextField(textField: bottomTextField, attributes: memeTextAttributes, "BOTTOM TEXT")
         
         // set up the memeView properties
-        self.memeView.contentMode = .scaleAspectFill
+        self.memeView.contentMode = .scaleAspectFit
         
     }
     
@@ -75,17 +72,11 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
     }
     
     @IBAction func takePhoto(_ sender: Any) {
-        let photoPickerController = UIImagePickerController()
-        photoPickerController.delegate = self
-        photoPickerController.sourceType = .camera
-        present(photoPickerController, animated: true, completion: nil)
+        selectPhoto(sourceType: .camera)
     }
     
     @IBAction func choosePhoto(_ sender: Any) {
-        let photoPickerController = UIImagePickerController()
-        photoPickerController.delegate = self
-        photoPickerController.sourceType = .photoLibrary
-        present(photoPickerController, animated: true, completion: nil)
+        selectPhoto(sourceType: .photoLibrary)
     }
     
     @IBAction func resetMeme() {
@@ -111,6 +102,19 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
             activityViewController.popoverPresentationController?.sourceView = self.view
             self.present(activityViewController, animated: true, completion: nil)
         }
+    }
+    
+    func setUpTextField(textField: UITextField, attributes: [NSAttributedString.Key: Any] , _ text: String) {
+        textField.defaultTextAttributes = attributes
+        textField.textAlignment = .center
+        textField.text = text
+    }
+    
+    func selectPhoto(sourceType: UIImagePickerController.SourceType){
+        let photoPickerController = UIImagePickerController()
+        photoPickerController.delegate = self
+        photoPickerController.sourceType = sourceType
+        present(photoPickerController, animated: true, completion: nil)
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
