@@ -31,6 +31,9 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //Hide Tab bar in this view
+        self.tabBarController?.tabBar.isHidden = true
+        
         // some logic to unfocus the text fields
         let tapGestureBackground = UITapGestureRecognizer(target: self, action: #selector(self.backgroundTapped(_:)))
         self.view.addGestureRecognizer(tapGestureBackground)
@@ -79,11 +82,15 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
         selectPhoto(sourceType: .photoLibrary)
     }
     
-    @IBAction func resetMeme() {
-        self.bottomTextField.text = "BOTTOM TEXT"
-        self.topTextField.text = "TOP TEXT"
-        self.memeView.image = nil
-        self.shareButton.isEnabled = false
+    @IBAction func returnToHistory() {
+//        self.bottomTextField.text = "BOTTOM TEXT"
+//        self.topTextField.text = "TOP TEXT"
+//        self.memeView.image = nil
+//        self.shareButton.isEnabled = false
+        self.tabBarController?.tabBar.isHidden = false
+        if let navigationController = navigationController {
+            navigationController.popToRootViewController(animated: true)
+        }
     }
     
     @IBAction func share(_ sender: Any) {
