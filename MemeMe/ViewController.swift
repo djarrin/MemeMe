@@ -97,11 +97,21 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
                     // User canceled
                     return
                 }
-                UIImageWriteToSavedPhotosAlbum(meme.memedImage, nil, nil, nil)
+                self.saveMeme(meme: meme)
             }
             activityViewController.popoverPresentationController?.sourceView = self.view
             self.present(activityViewController, animated: true, completion: nil)
         }
+    }
+    
+    func saveMeme(meme: Meme) {
+        //save to album
+        UIImageWriteToSavedPhotosAlbum(meme.memedImage, nil, nil, nil)
+        
+        // add meme to memes array
+        let object = UIApplication.shared.delegate
+        let appDelegate = object as! AppDelegate
+        appDelegate.memes.append(meme)
     }
     
     func setUpTextField(textField: UITextField, attributes: [NSAttributedString.Key: Any] , _ text: String) {
