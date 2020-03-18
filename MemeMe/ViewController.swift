@@ -119,6 +119,8 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
         let object = UIApplication.shared.delegate
         let appDelegate = object as! AppDelegate
         appDelegate.memes.append(meme)
+        
+        self.returnToHistory()
     }
     
     func setUpTextField(textField: UITextField, attributes: [NSAttributedString.Key: Any] , _ text: String) {

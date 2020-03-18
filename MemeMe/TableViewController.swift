@@ -9,7 +9,46 @@
 import UIKit
 
 class TableViewController: UITableViewController {
+    var memes: [Meme]!
+    
     override func viewDidLoad() {
+        self.setNavigation()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        self.memes = appDelegate.memes
+        //Show Tab bar in this view
+        self.tabBarController?.tabBar.isHidden = false
+        
+        tableView!.reloadData()
+    }
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if let currentMemes = memes {
+            return currentMemes.count
+        } else {
+            return 0
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "MemeCell")!
+        let meme = self.memes[(indexPath as NSIndexPath).row]
+        
+        cell.textLabel?.text = meme.topText + "..." + meme.bottomText
+        cell.imageView?.image = meme.memedImage
+        
+        return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let memeShowViewController = self.storyboard!.instantiateViewController(identifier: "MemeShowViewController") as! MemeShowViewController
+        memeShowViewController.memeImage = self.memes[(indexPath as NSIndexPath).row].memedImage
+        self.navigationController!.pushViewController(memeShowViewController, animated: true)
+    }
+    
+    func setNavigation() {
         let button = UIButton(type: .system)
         button.setImage(UIImage(systemName: "plus"), for: .normal)
         button.addTarget(self, action: #selector(takeMeme), for: .touchUpInside)
@@ -21,9 +60,8 @@ class TableViewController: UITableViewController {
     
     @objc func takeMeme(){
         let memeController = self.storyboard!.instantiateViewController(identifier: "createMemeView") as! ViewController
-//        if let navController = self.navigationController{
-//            navController.present(memeController, animated: true)
-//        }
         self.navigationController!.pushViewController(memeController, animated: true)
     }
+    
+    
 }
