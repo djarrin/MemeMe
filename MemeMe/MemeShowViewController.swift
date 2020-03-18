@@ -14,7 +14,6 @@ class MemeShowViewController: UIViewController {
     
     @IBOutlet weak var MemeImageView: UIImageView!
     
-    
     override func viewDidLoad() {
         //Hide Tab bar in this view
         self.tabBarController?.tabBar.isHidden = true

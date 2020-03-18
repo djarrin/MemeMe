@@ -4,7 +4,6 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -205,19 +204,19 @@
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MemeCollectionViewCell" id="WCq-Jc-mdK" customClass="MemeCollectionViewCell" customModule="MemeMe" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="125" height="126"/>
+                                <rect key="frame" x="0.0" y="0.0" width="126" height="126"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="vbt-f7-Gs0">
-                                    <rect key="frame" x="0.0" y="0.0" width="125" height="126"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                    <rect key="frame" x="0.0" y="0.0" width="126" height="126"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dYr-Pq-iRc">
-                                            <rect key="frame" x="-58" y="-2" width="240" height="128"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="126" height="128"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         </imageView>
                                     </subviews>
-                                </collectionViewCellContentView>
-                                <size key="customSize" width="125" height="126"/>
+                                </view>
+                                <size key="customSize" width="126" height="126"/>
                                 <connections>
                                     <outlet property="memeCellImage" destination="dYr-Pq-iRc" id="VPU-ZV-Oes"/>
                                 </connections>
@@ -245,12 +244,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PSQ-AG-MVK">
-                                <rect key="frame" x="20" y="224" width="374" height="448"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="PSQ-AG-MVK">
+                                <rect key="frame" x="20" y="128" width="374" height="671"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="PSQ-AG-MVK" firstAttribute="centerX" secondItem="uxH-d0-tV0" secondAttribute="centerX" id="Urj-CP-aDx"/>
+                            <constraint firstItem="uxH-d0-tV0" firstAttribute="trailing" secondItem="PSQ-AG-MVK" secondAttribute="trailing" constant="20" id="gu7-FN-78m"/>
+                            <constraint firstItem="uxH-d0-tV0" firstAttribute="bottom" secondItem="PSQ-AG-MVK" secondAttribute="bottom" constant="63" id="hw9-O9-acu"/>
+                            <constraint firstItem="PSQ-AG-MVK" firstAttribute="top" secondItem="uxH-d0-tV0" secondAttribute="top" constant="84" id="pxX-Qj-7OZ"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="uxH-d0-tV0"/>
                     </view>
                     <connections>
@@ -259,7 +263,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gnG-EO-pVk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1282.608695652174" y="383.70535714285711"/>
+            <point key="canvasLocation" x="1281.1594202898552" y="382.36607142857139"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="WmI-4g-98V">

@@ -8,25 +8,18 @@
 
 import UIKit
 
-class CollectionViewController: UICollectionViewController {
+class CollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
     @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!
     
     var memes: [Meme]!
     
+    let space:CGFloat = 3.0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.setNavigation()
-        
-        let space:CGFloat = 90.0
-        let dimension = (view.frame.size.width - (2 * space)) / 3.0
-
-        flowLayout.minimumInteritemSpacing = space
-        flowLayout.minimumLineSpacing = space
-        flowLayout.itemSize = CGSize(width: dimension, height: dimension)
     }
-    
     
     override func viewWillAppear(_ animated: Bool) {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -34,7 +27,23 @@ class CollectionViewController: UICollectionViewController {
         //Show Tab bar in this view
         self.tabBarController?.tabBar.isHidden = false
         
+        let dimension = self.getDiminsion()
+
+        flowLayout.minimumInteritemSpacing = self.space
+        flowLayout.minimumLineSpacing = self.space
+        flowLayout.itemSize = CGSize(width: dimension, height: dimension)
+        
         collectionView!.reloadData()
+    }
+    
+    func getDiminsion() -> CGFloat {
+        let size = UIScreen.main.bounds.size
+        
+        if size.width < size.height {
+            return (view.frame.size.width - (2 * self.space)) / 3.0
+        } else {
+            return (view.frame.size.height - (2 * self.space)) / 3.0
+        }
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -46,8 +55,7 @@ class CollectionViewController: UICollectionViewController {
         let meme = self.memes[(indexPath as NSIndexPath).row]
         
         cell.memeCellImage.image = meme.memedImage
-        cell.memeCellImage.contentMode = .scaleAspectFill
-//        cell.memeCellImage.layer.masksToBounds = true
+        cell.memeCellImage.contentMode = .scaleAspectFit
         
         return cell
     }
@@ -56,6 +64,12 @@ class CollectionViewController: UICollectionViewController {
         let memeShowViewController = self.storyboard!.instantiateViewController(identifier: "MemeShowViewController") as! MemeShowViewController
         memeShowViewController.memeImage = self.memes[(indexPath as NSIndexPath).row].memedImage
         self.navigationController!.pushViewController(memeShowViewController, animated: true)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let dimension = self.getDiminsion()
+        
+        return CGSize(width: dimension, height: dimension)
     }
     
     @objc func takeMeme(){

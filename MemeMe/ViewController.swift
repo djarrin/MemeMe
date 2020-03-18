@@ -83,10 +83,6 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
     }
     
     @IBAction func returnToHistory() {
-//        self.bottomTextField.text = "BOTTOM TEXT"
-//        self.topTextField.text = "TOP TEXT"
-//        self.memeView.image = nil
-//        self.shareButton.isEnabled = false
         self.tabBarController?.tabBar.isHidden = false
         if let navigationController = navigationController {
             navigationController.popToRootViewController(animated: true)

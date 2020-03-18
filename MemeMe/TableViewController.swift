@@ -25,11 +25,7 @@ class TableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if let currentMemes = memes {
-            return currentMemes.count
-        } else {
-            return 0
-        }
+        return self.memes.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
