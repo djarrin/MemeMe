@@ -36,16 +36,6 @@ class CollectionViewController: UICollectionViewController, UICollectionViewDele
         collectionView!.reloadData()
     }
     
-    func getDiminsion() -> CGFloat {
-        let size = UIScreen.main.bounds.size
-        
-        if size.width < size.height {
-            return (view.frame.size.width - (2 * self.space)) / 3.0
-        } else {
-            return (view.frame.size.height - (2 * self.space)) / 3.0
-        }
-    }
-    
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.memes.count
     }
@@ -70,20 +60,5 @@ class CollectionViewController: UICollectionViewController, UICollectionViewDele
         let dimension = self.getDiminsion()
         
         return CGSize(width: dimension, height: dimension)
-    }
-    
-    @objc func takeMeme(){
-        let memeController = self.storyboard!.instantiateViewController(identifier: "createMemeView") as! ViewController
-        self.navigationController!.pushViewController(memeController, animated: true)
-    }
-    
-    func setNavigation() {
-        let button = UIButton(type: .system)
-        button.setImage(UIImage(systemName: "plus"), for: .normal)
-        button.addTarget(self, action: #selector(takeMeme), for: .touchUpInside)
-        button.sizeToFit()
-        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: button)
-        
-        navigationItem.title = "Sent Memes"
     }
 }

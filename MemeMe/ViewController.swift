@@ -19,7 +19,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
     @IBOutlet weak var cancelButton: UIBarButtonItem!
     @IBOutlet weak var shareButton: UIBarButtonItem!
     
-    let labelDelegate = memeLabelDelegate()
+    let labelDelegate = MemeLabelDelegate()
     
     let memeTextAttributes: [NSAttributedString.Key: Any] = [
         NSAttributedString.Key.strokeColor: UIColor.black,
@@ -65,13 +65,6 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.unsubscribeFromKeyboardNotifications()
-    }
-    
-    func subscribeToKeyboardNotifications() {
-
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
     @IBAction func takePhoto(_ sender: Any) {
@@ -147,11 +140,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
     func generateMemeImage() -> UIImage {
         
         // Hide toolbar and navbar
-        navigationController?.setNavigationBarHidden(true, animated: false)
-        self.navigationController?.isNavigationBarHidden = true
-        self.bottomToolbar.isHidden = true
-        self.topTextField.tintColor = UIColor.clear
-        self.bottomTextField.tintColor = UIColor.clear
+        self.hideToolbars(true)
 
         
         // Render view to an image
@@ -161,13 +150,23 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
         UIGraphicsEndImageContext()
 
         // re-show toolbar and navbar
-        navigationController?.setNavigationBarHidden(false, animated: false)
-        self.navigationController?.isNavigationBarHidden = false
-        self.bottomToolbar.isHidden = false
-        self.topTextField.tintColor = UIColor.blue
-        self.bottomTextField.tintColor = UIColor.blue
+        self.hideToolbars(false)
         
         return memedImage
+    }
+    
+    func hideToolbars(_ hide: Bool) {
+        navigationController?.setNavigationBarHidden(hide, animated: false)
+        self.navigationController?.isNavigationBarHidden = hide
+        self.bottomToolbar.isHidden = hide
+        
+        if hide {
+            self.topTextField.tintColor = UIColor.clear
+            self.bottomTextField.tintColor = UIColor.clear
+        } else {
+            self.topTextField.tintColor = UIColor.blue
+            self.bottomTextField.tintColor = UIColor.blue
+        }
     }
     
     @objc func backgroundTapped(_ sender: UITapGestureRecognizer)

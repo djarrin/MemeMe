@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class memeLabelDelegate : NSObject, UITextFieldDelegate {
+class MemeLabelDelegate : NSObject, UITextFieldDelegate {
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         textField.text = ""
