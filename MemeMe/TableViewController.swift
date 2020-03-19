@@ -12,10 +12,12 @@ class TableViewController: UITableViewController {
     var memes: [Meme]!
     
     override func viewDidLoad() {
+        super.viewDidLoad()
+        
         setNavigation()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {        
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         memes = appDelegate.memes
         //Show Tab bar in this view

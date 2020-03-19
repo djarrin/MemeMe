@@ -89,11 +89,9 @@ class CreateMemeViewController: UIViewController, UITextFieldDelegate, UIImagePi
             let shareMeme = [meme.memedImage]
             let activityViewController = UIActivityViewController(activityItems: shareMeme, applicationActivities: nil)
             activityViewController.completionWithItemsHandler = {(activityType: UIActivity.ActivityType?, completed: Bool, returnedItems: [Any]?, error: Error?) in
-                if !completed {
-                    // User canceled
-                    return
+                if completed {
+                    self.saveMeme(meme: meme)
                 }
-                self.saveMeme(meme: meme)
             }
             activityViewController.popoverPresentationController?.sourceView = self.view
             self.present(activityViewController, animated: true, completion: nil)
