@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class CreateMemeViewController: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     
     @IBOutlet weak var bottomToolbar: UIToolbar!
@@ -16,14 +16,14 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
     @IBOutlet weak var bottomTextField: UITextField!
     @IBOutlet weak var takePhotoButton: UIBarButtonItem!
     @IBOutlet weak var memeView: UIImageView!
-    @IBOutlet weak var cancelButton: UIBarButtonItem!
     @IBOutlet weak var shareButton: UIBarButtonItem!
+    @IBOutlet weak var cancelButton: UIBarButtonItem!
     
     let labelDelegate = MemeLabelDelegate()
     
     let memeTextAttributes: [NSAttributedString.Key: Any] = [
         NSAttributedString.Key.strokeColor: UIColor.black,
-        NSAttributedString.Key.strokeWidth: 2.0,
+        NSAttributedString.Key.strokeWidth: -2.0,
         NSAttributedString.Key.foregroundColor: UIColor.white,
         NSAttributedString.Key.font: UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
     ]
@@ -36,24 +36,24 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
         
         // some logic to unfocus the text fields
         let tapGestureBackground = UITapGestureRecognizer(target: self, action: #selector(self.backgroundTapped(_:)))
-        self.view.addGestureRecognizer(tapGestureBackground)
+        view.addGestureRecognizer(tapGestureBackground)
         
         // Enable or disable the takePhotoButton depending on if camera is available
-        self.takePhotoButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
+        takePhotoButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
         // disable the share button unless an image is present
-        if self.memeView.image == nil {
-            self.shareButton.isEnabled = false
+        if memeView.image == nil {
+            shareButton.isEnabled = false
         }
         
-        self.topTextField.delegate = labelDelegate
-        self.bottomTextField.delegate = labelDelegate
+        topTextField.delegate = labelDelegate
+        bottomTextField.delegate = labelDelegate
         
         // Top and Bottom Textfield attributes
         setUpTextField(textField: topTextField, attributes: memeTextAttributes, "TOP TEXT")
         setUpTextField(textField: bottomTextField, attributes: memeTextAttributes, "BOTTOM TEXT")
         
         // set up the memeView properties
-        self.memeView.contentMode = .scaleAspectFit
+        memeView.contentMode = .scaleAspectFit
         
     }
     
@@ -64,7 +64,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        self.unsubscribeFromKeyboardNotifications()
+        unsubscribeFromKeyboardNotifications()
     }
     
     @IBAction func takePhoto(_ sender: Any) {
@@ -76,7 +76,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
     }
     
     @IBAction func returnToHistory() {
-        self.tabBarController?.tabBar.isHidden = false
+        tabBarController?.tabBar.isHidden = false
         if let navigationController = navigationController {
             navigationController.popToRootViewController(animated: true)
         }
@@ -85,7 +85,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
     @IBAction func share(_ sender: Any) {
         let memeImage = generateMemeImage()
         if let originalImage = memeView.image {
-            let meme = Meme(topText: self.topTextField.text!, bottomText: self.bottomTextField.text!, originalImage: originalImage, memedImage: memeImage)
+            let meme = Meme(topText: topTextField.text!, bottomText: bottomTextField.text!, originalImage: originalImage, memedImage: memeImage)
             let shareMeme = [meme.memedImage]
             let activityViewController = UIActivityViewController(activityItems: shareMeme, applicationActivities: nil)
             activityViewController.completionWithItemsHandler = {(activityType: UIActivity.ActivityType?, completed: Bool, returnedItems: [Any]?, error: Error?) in
@@ -127,8 +127,8 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let image = info[.originalImage] as? UIImage {
-            self.memeView.image = image
-            self.shareButton.isEnabled = true
+            memeView.image = image
+            shareButton.isEnabled = true
         }
         dismiss(animated: true, completion: nil)
     }
@@ -140,7 +140,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
     func generateMemeImage() -> UIImage {
         
         // Hide toolbar and navbar
-        self.hideToolbars(true)
+        hideToolbars(true)
 
         
         // Render view to an image
@@ -150,28 +150,28 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
         UIGraphicsEndImageContext()
 
         // re-show toolbar and navbar
-        self.hideToolbars(false)
+        hideToolbars(false)
         
         return memedImage
     }
     
     func hideToolbars(_ hide: Bool) {
         navigationController?.setNavigationBarHidden(hide, animated: false)
-        self.navigationController?.isNavigationBarHidden = hide
-        self.bottomToolbar.isHidden = hide
+        navigationController?.isNavigationBarHidden = hide
+        bottomToolbar.isHidden = hide
         
         if hide {
-            self.topTextField.tintColor = UIColor.clear
-            self.bottomTextField.tintColor = UIColor.clear
+            topTextField.tintColor = UIColor.clear
+            bottomTextField.tintColor = UIColor.clear
         } else {
-            self.topTextField.tintColor = UIColor.blue
-            self.bottomTextField.tintColor = UIColor.blue
+            topTextField.tintColor = UIColor.blue
+            bottomTextField.tintColor = UIColor.blue
         }
     }
     
     @objc func backgroundTapped(_ sender: UITapGestureRecognizer)
     {
-        self.view.endEditing(true)
+        view.endEditing(true)
     }
     
 }

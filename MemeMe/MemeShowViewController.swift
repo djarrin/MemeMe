@@ -16,13 +16,13 @@ class MemeShowViewController: UIViewController {
     
     override func viewDidLoad() {
         //Hide Tab bar in this view
-        self.tabBarController?.tabBar.isHidden = true
+        tabBarController?.tabBar.isHidden = true
         
-        self.MemeImageView.contentMode = .scaleAspectFit
+        MemeImageView.contentMode = .scaleAspectFit
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.MemeImageView!.image = self.memeImage
+        MemeImageView!.image = memeImage
     }
 }

@@ -18,31 +18,31 @@ class CollectionViewController: UICollectionViewController, UICollectionViewDele
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.setNavigation()
+        setNavigation()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        self.memes = appDelegate.memes
+        memes = appDelegate.memes
         //Show Tab bar in this view
-        self.tabBarController?.tabBar.isHidden = false
+        tabBarController?.tabBar.isHidden = false
         
         let dimension = self.getDiminsion()
 
-        flowLayout.minimumInteritemSpacing = self.space
-        flowLayout.minimumLineSpacing = self.space
+        flowLayout.minimumInteritemSpacing = space
+        flowLayout.minimumLineSpacing = space
         flowLayout.itemSize = CGSize(width: dimension, height: dimension)
         
         collectionView!.reloadData()
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.memes.count
+        return memes.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MemeCollectionViewCell", for: indexPath) as! MemeCollectionViewCell
-        let meme = self.memes[(indexPath as NSIndexPath).row]
+        let meme = memes[(indexPath as NSIndexPath).row]
         
         cell.memeCellImage.image = meme.memedImage
         cell.memeCellImage.contentMode = .scaleAspectFit
@@ -51,13 +51,13 @@ class CollectionViewController: UICollectionViewController, UICollectionViewDele
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let memeShowViewController = self.storyboard!.instantiateViewController(identifier: "MemeShowViewController") as! MemeShowViewController
-        memeShowViewController.memeImage = self.memes[(indexPath as NSIndexPath).row].memedImage
-        self.navigationController!.pushViewController(memeShowViewController, animated: true)
+        let memeShowViewController = storyboard!.instantiateViewController(identifier: "MemeShowViewController") as! MemeShowViewController
+        memeShowViewController.memeImage = memes[(indexPath as NSIndexPath).row].memedImage
+        navigationController!.pushViewController(memeShowViewController, animated: true)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let dimension = self.getDiminsion()
+        let dimension = getDiminsion()
         
         return CGSize(width: dimension, height: dimension)
     }

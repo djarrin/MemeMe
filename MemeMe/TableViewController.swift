@@ -12,25 +12,25 @@ class TableViewController: UITableViewController {
     var memes: [Meme]!
     
     override func viewDidLoad() {
-        self.setNavigation()
+        setNavigation()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        self.memes = appDelegate.memes
+        memes = appDelegate.memes
         //Show Tab bar in this view
-        self.tabBarController?.tabBar.isHidden = false
+        tabBarController?.tabBar.isHidden = false
         
         tableView!.reloadData()
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.memes.count
+        return memes.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MemeCell")!
-        let meme = self.memes[(indexPath as NSIndexPath).row]
+        let meme = memes[(indexPath as NSIndexPath).row]
         
         cell.textLabel?.text = meme.topText + "..." + meme.bottomText
         cell.imageView?.image = meme.memedImage
@@ -39,8 +39,8 @@ class TableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let memeShowViewController = self.storyboard!.instantiateViewController(identifier: "MemeShowViewController") as! MemeShowViewController
-        memeShowViewController.memeImage = self.memes[(indexPath as NSIndexPath).row].memedImage
-        self.navigationController!.pushViewController(memeShowViewController, animated: true)
+        let memeShowViewController = storyboard!.instantiateViewController(identifier: "MemeShowViewController") as! MemeShowViewController
+        memeShowViewController.memeImage = memes[(indexPath as NSIndexPath).row].memedImage
+        navigationController!.pushViewController(memeShowViewController, animated: true)
     }
 }

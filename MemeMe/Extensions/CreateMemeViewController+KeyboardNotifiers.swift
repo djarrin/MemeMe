@@ -8,13 +8,13 @@
 
 import UIKit
 
-extension ViewController {
+extension CreateMemeViewController {
     func unsubscribeFromKeyboardNotifications() {
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
     }
 
     @objc func keyboardWillShow(_ notification:Notification) {
-        if self.bottomTextField.isEditing {
+        if bottomTextField.isEditing {
             view.frame.origin.y = -1 * getKeyboardHeight(notification)
         }
     }

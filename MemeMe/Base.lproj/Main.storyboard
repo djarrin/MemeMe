@@ -7,10 +7,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Create Meme View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController storyboardIdentifier="createMemeView" id="BYZ-38-t0r" customClass="ViewController" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="createMemeView" id="BYZ-38-t0r" customClass="CreateMemeViewController" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleAspectFit" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -22,20 +22,10 @@
                             </imageView>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="TOP TEXT" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ip2-ZL-zfh">
                                 <rect key="frame" x="177.5" y="143" width="59" height="34"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="34" id="s2n-Oo-y0P"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
-                            </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="BOTTOM TEXT" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="I4x-as-VSA">
-                                <rect key="frame" x="158" y="688" width="98" height="34"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="34" id="au8-T9-cz8"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
                             </textField>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleAspectFill" translatesAutoresizingMaskIntoConstraints="NO" id="vze-aa-q8x" userLabel="bottomToolbar">
@@ -58,6 +48,14 @@
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="Ish-BK-qE2"/>
                                 </items>
                             </toolbar>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="BOTTOM TEXT" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="I4x-as-VSA">
+                                <rect key="frame" x="158" y="738" width="98" height="34"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="34" id="au8-T9-cz8"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <constraints>
@@ -66,10 +64,11 @@
                             <constraint firstItem="LPx-cf-Mw9" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="44" id="E9z-2r-m62"/>
                             <constraint firstItem="LPx-cf-Mw9" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="MEh-CW-v2e"/>
                             <constraint firstItem="vze-aa-q8x" firstAttribute="leading" secondItem="LPx-cf-Mw9" secondAttribute="leading" id="MTf-N0-yAh"/>
+                            <constraint firstItem="vze-aa-q8x" firstAttribute="top" secondItem="I4x-as-VSA" secondAttribute="bottom" constant="46" id="NrU-Dc-Nzx"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="vze-aa-q8x" secondAttribute="bottom" id="YQD-st-g8F"/>
                             <constraint firstItem="I4x-as-VSA" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="aX6-qk-VJc"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="I4x-as-VSA" secondAttribute="bottom" constant="140" id="amv-ad-iyG"/>
-                            <constraint firstItem="vze-aa-q8x" firstAttribute="top" secondItem="I4x-as-VSA" secondAttribute="bottom" constant="96" id="hpb-jR-Kup"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="I4x-as-VSA" secondAttribute="bottom" constant="90" id="amv-ad-iyG"/>
+                            <constraint firstItem="vze-aa-q8x" firstAttribute="top" secondItem="I4x-as-VSA" secondAttribute="bottom" constant="46" id="hpb-jR-Kup"/>
                             <constraint firstItem="LPx-cf-Mw9" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="sUj-8o-S6X"/>
                             <constraint firstItem="Ip2-ZL-zfh" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="55" id="zqm-pm-hpB"/>
                             <constraint firstItem="Ip2-ZL-zfh" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="zyD-GD-3KI"/>
@@ -86,14 +85,14 @@
                         <barButtonItem key="rightBarButtonItem" title="Cancel" id="HfO-v7-S2W" userLabel="Cancel">
                             <color key="tintColor" systemColor="linkColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
-                                <action selector="returnToHistory" destination="BYZ-38-t0r" id="lAf-bL-RaT"/>
+                                <action selector="returnToHistory" destination="BYZ-38-t0r" id="1x5-Uq-9M9"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="bottomTextField" destination="I4x-as-VSA" id="hfn-iD-tXB"/>
                         <outlet property="bottomToolbar" destination="vze-aa-q8x" id="NWs-uQ-Y5A"/>
-                        <outlet property="cancelButton" destination="HfO-v7-S2W" id="5Ch-al-zFp"/>
+                        <outlet property="cancelButton" destination="HfO-v7-S2W" id="VEo-l7-COG"/>
                         <outlet property="memeView" destination="LPx-cf-Mw9" id="xIw-oF-GtT"/>
                         <outlet property="shareButton" destination="FrV-76-YEJ" id="2bz-V9-fB6"/>
                         <outlet property="takePhotoButton" destination="sPs-HO-Ez2" id="FZd-yw-M8e"/>

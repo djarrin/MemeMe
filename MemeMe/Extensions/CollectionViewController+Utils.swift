@@ -10,8 +10,8 @@ import UIKit
 
 extension CollectionViewController {
     @objc func takeMeme(){
-        let memeController = self.storyboard!.instantiateViewController(identifier: "createMemeView") as! ViewController
-        self.navigationController!.pushViewController(memeController, animated: true)
+        let memeController = self.storyboard!.instantiateViewController(identifier: "createMemeView") as! CreateMemeViewController
+        navigationController!.pushViewController(memeController, animated: true)
     }
     
     func setNavigation() {
