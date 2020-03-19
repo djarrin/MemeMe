@@ -32,7 +32,7 @@ class CreateMemeViewController: UIViewController, UITextFieldDelegate, UIImagePi
         super.viewDidLoad()
         
         //Hide Tab bar in this view
-        self.tabBarController?.tabBar.isHidden = true
+        tabBarController?.tabBar.isHidden = true
         
         // some logic to unfocus the text fields
         let tapGestureBackground = UITapGestureRecognizer(target: self, action: #selector(self.backgroundTapped(_:)))
@@ -109,7 +109,7 @@ class CreateMemeViewController: UIViewController, UITextFieldDelegate, UIImagePi
         let appDelegate = object as! AppDelegate
         appDelegate.memes.append(meme)
         
-        self.returnToHistory()
+        returnToHistory()
     }
     
     func setUpTextField(textField: UITextField, attributes: [NSAttributedString.Key: Any] , _ text: String) {
